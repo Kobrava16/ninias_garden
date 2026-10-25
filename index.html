@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninia's Garden | Upscale Georgian Restaurant in Tbilisi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        botanical: {
+                            900: '#0d2218',
+                            800: '#142d20',
+                            700: '#1b3b2b',
+                            600: '#274f3b',
+                            100: '#eef5f0',
+                        },
+                        gold: {
+                            300: '#f3e5ab',
+                            400: '#e5ca78',
+                            500: '#d4af37',
+                            600: '#aa8822',
+                        },
+                        gateBlue: {
+                            500: '#3a6073',
+                            600: '#2c4959',
+                            700: '#1e3440',
+                        },
+                        sand: '#fcfaf7',
+                        cardBg: '#11281c',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbars and sleek overlays */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d2218;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #274f3b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(13,34,24,0.4) 0%, rgba(13,34,24,0.85) 75%, rgba(13,34,24,1) 100%);
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-botanical-900 text-stone-200 font-sans antialiased selection:bg-gold-500 selection:text-botanical-900">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gateBlue-700/80 backdrop-blur text-stone-200 text-xs md:text-sm py-2 px-4 text-center border-b border-white/10 flex justify-center items-center gap-3">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>Spring Garden Tables Now Available — <strong>Advance booking highly recommended for outdoor seating</strong></span>
+        <button onclick="openModal()" class="underline font-semibold hover:text-gold-400 transition-colors hidden sm:inline">Book Now</button>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 bg-botanical-900/90 backdrop-blur-md border-b border-emerald-900/40 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold-500/50 bg-botanical-800 flex items-center justify-center text-gold-400 group-hover:border-gold-400 group-hover:scale-105 transition-all">
+                    <i class="fa-solid font-serif text-xl">N</i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl tracking-wider text-white group-hover:text-gold-300 transition-colors">Ninia’s Garden</span>
+                    <span class="text-[10px] uppercase tracking-widest text-emerald-400/80 -mt-1">Tbilisi · Georgia</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="text-stone-300 hover:text-gold-400 transition-colors">The Garden & Dining</a>
+                <a href="#menu" class="text-stone-300 hover:text-gold-400 transition-colors">Menu Highlights</a>
+                <a href="#reviews" class="text-stone-300 hover:text-gold-400 transition-colors">Guest Stories</a>
+                <a href="#contact" class="text-stone-300 hover:text-gold-400 transition-colors">Location & Hours</a>
+            </nav>
+
+            <!-- CTA Actions -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="https://glovoapp.com" target="_blank" rel="noopener" class="px-4 py-2 text-xs uppercase tracking-wider font-semibold text-amber-300 bg-amber-950/40 border border-amber-500/30 rounded-full hover:bg-amber-900/50 transition-all flex items-center gap-2">
+                    <i class="fa-solid font-bold fa-motorcycle text-amber-400"></i> Glovo
+                </a>
+                <button onclick="openModal()" class="px-5 py-2.5 text-xs uppercase tracking-widest font-semibold text-botanical-900 bg-gradient-to-r from-gold-400 to-gold-500 rounded-full shadow-lg hover:shadow-gold-500/20 hover:brightness-110 active:scale-95 transition-all">
+                    Reserve Table
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-stone-300 hover:text-white focus:outline-none">
+                <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-botanical-800 border-b border-emerald-900/60 px-6 py-6 space-y-4">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-base text-stone-200 hover:text-gold-400">The Garden & Dining</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block text-base text-stone-200 hover:text-gold-400">Menu Highlights</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block text-base text-stone-200 hover:text-gold-400">Guest Stories</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-base text-stone-200 hover:text-gold-400">Location & Hours</a>
+            <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
+                <button onclick="toggleMobileMenu(); openModal();" class="w-full py-3 text-center text-xs uppercase tracking-widest font-semibold text-botanical-900 bg-gold-400 rounded-lg">
+                    Reserve Table
+                </button>
+                <a href="https://glovoapp.com" target="_blank" class="w-full py-3 text-center text-xs uppercase tracking-widest font-semibold text-amber-300 bg-amber-950/60 border border-amber-500/30 rounded-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-motorcycle"></i> Order on Glovo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <!-- Background Imagery Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=2000" alt="Restaurant Ambiance" class="w-full h-full object-cover object-center scale-105 animate-pulse" style="animation-duration: 12s;" />
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20 flex flex-col items-center">
+            <!-- Iconic Gate Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gateBlue-600/80 border border-gateBlue-500 text-stone-100 text-xs uppercase tracking-widest mb-6 backdrop-blur-md">
+                <i class="fa-solid fa-door-open text-gold-400"></i> Step Through The Blue Gate
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-wide text-white mb-6 leading-tight">
+                Authentic Georgian Flavors <br/>
+                <span class="italic font-light text-gold-300">Nestled in a Secret Botanical Oasis</span>
+            </h1>
+
+            <p class="max-w-2xl text-stone-300 text-base sm:text-lg mb-10 leading-relaxed font-light">
+                Discover Tbilisi’s beloved hidden gem at 97 Dimitri Uznadze St. Experience classy indoor dining under chandeliers or vibrant, romantic garden tables wrapped in lush greenery.
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 text-xs uppercase tracking-widest font-semibold text-botanical-900 bg-gradient-to-r from-gold-400 to-gold-500 rounded-full shadow-xl hover:shadow-gold-500/20 hover:scale-105 transition-all">
+                    Reserve Your Table
+                </button>
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 text-xs uppercase tracking-widest font-semibold text-stone-200 bg-botanical-800/80 border border-emerald-700/60 rounded-full hover:bg-botanical-700 hover:border-gold-500/50 transition-all backdrop-blur-md">
+                    Explore Menu
+                </a>
+            </div>
+
+            <!-- Key Quick Info Snippets -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-white/10 w-full max-w-4xl text-center">
+                <div>
+                    <span class="text-gold-400 font-serif text-2xl block font-semibold">4.5 ★</span>
+                    <span class="text-xs text-stone-400 uppercase tracking-wider">1,840+ Google Reviews</span>
+                </div>
+                <div>
+                    <span class="text-gold-400 font-serif text-2xl block font-semibold">Lush Garden</span>
+                    <span class="text-xs text-stone-400 uppercase tracking-wider">Outdoor Seating</span>
+                </div>
+                <div>
+                    <span class="text-gold-400 font-serif text-2xl block font-semibold">Fireplace</span>
+                    <span class="text-xs text-stone-400 uppercase tracking-wider">Cozy Indoor Dining</span>
+                </div>
+                <div>
+                    <span class="text-gold-400 font-serif text-2xl block font-semibold">1 PM - 2 AM</span>
+                    <span class="text-xs text-stone-400 uppercase tracking-wider">Open Daily</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE / ABOUT SECTION -->
+    <section id="about" class="py-24 bg-botanical-800/60 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <!-- Story Text -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 text-gold-400 text-xs font-semibold uppercase tracking-widest">
+                        <span class="w-8 h-[1px] bg-gold-400"></span>
+                        The Experience
+                    </div>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-white font-normal leading-tight">
+                        Look for the <span class="text-gateBlue-500 font-semibold">Blue Gate</span> on the corner.
+                    </h2>
+                    <p class="text-stone-300 text-base leading-relaxed">
+                        Tucked away in the historic Chugureti district on Dimitri Uznadze Street, <strong>Ninia's Garden</strong> unfolds behind an understated blue door into one of Tbilisi's most enchanting dining destinations.
+                    </p>
+                    <p class="text-stone-300 text-base leading-relaxed">
+                        Whether you are gathering around our courtyard fire pit under twinkling garden lights or relaxing in our opulent indoor hall with warm wooden tones and glowing fireplace warmth, Ninia's offers an unforgettable backdrop for contemporary Georgian cuisine.
+                    </p>
+
+                    <!-- Feature Tags Grid -->
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-botanical-900/80 border border-emerald-900/50 flex items-start gap-3">
+                            <i class="fa-solid fa-tree text-emerald-400 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-medium text-sm">Outdoor Courtyard</h4>
+                                <p class="text-xs text-stone-400">Serene botanical garden setting with shaded tables.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-botanical-900/80 border border-emerald-900/50 flex items-start gap-3">
+                            <i class="fa-solid fa-fire text-amber-400 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-medium text-sm">Indoor Fireplace</h4>
+                                <p class="text-xs text-stone-400">Classy, warm lighting & refined table settings.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-botanical-900/80 border border-emerald-900/50 flex items-start gap-3">
+                            <i class="fa-solid fa-seedling text-green-400 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-medium text-sm">Vegan & Vegetarian</h4>
+                                <p class="text-xs text-stone-400">Rich assortment of plant-based dishes & salads.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-botanical-900/80 border border-emerald-900/50 flex items-start gap-3">
+                            <i class="fa-solid fa-wine-glass text-rose-400 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-medium text-sm">Natural Georgian Wine</h4>
+                                <p class="text-xs text-stone-400">Curated white, amber, and traditional Qvevri wines.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Gallery Card Grid -->
+                <div class="grid grid-cols-2 gap-4 relative">
+                    <div class="space-y-4">
+                        <div class="rounded-2xl overflow-hidden border border-emerald-800/50 shadow-2xl relative group">
+                            <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800" alt="Garden Courtyard" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 bg-botanical-900/80 backdrop-blur px-3 py-1 rounded-full text-xs text-stone-200">The Garden Courtyard</div>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden border border-emerald-800/50 shadow-2xl relative group">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800" alt="Georgian Feast" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 bg-botanical-900/80 backdrop-blur px-3 py-1 rounded-full text-xs text-stone-200">Artisanal Georgian Dishes</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="rounded-2xl overflow-hidden border border-emerald-800/50 shadow-2xl relative group">
+                            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80&w=800" alt="Georgian Wine Selection" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 bg-botanical-900/80 backdrop-blur px-3 py-1 rounded-full text-xs text-stone-200">Selected Wines</div>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden border border-emerald-800/50 shadow-2xl relative group">
+                            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&q=80&w=800" alt="Classy Indoor Dining" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 bg-botanical-900/80 backdrop-blur px-3 py-1 rounded-full text-xs text-stone-200">Indoor Fireplace Dining</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MENU SECTION -->
+    <section id="menu" class="py-24 bg-botanical-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="text-gold-400 text-xs font-semibold uppercase tracking-widest block">Culinary Craftsmanship</span>
+                <h2 class="font-serif text-4xl sm:text-5xl text-white">Ninia's Seasonal Menu</h2>
+                <p class="text-stone-300 text-sm sm:text-base font-light">
+                    Elevated traditional recipes reimagined with fresh local herbs, rich spices, and locally sourced Georgian ingredients.
+                </p>
+            </div>
+
+            <!-- Filter Category Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12" id="menu-tabs">
+                <button onclick="filterMenu('all')" class="menu-tab active px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border transition-all bg-gold-500 text-botanical-900 border-gold-500" data-cat="all">
+                    All Categories
+                </button>
+                <button onclick="filterMenu('popular')" class="menu-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border border-emerald-800 text-stone-300 hover:border-gold-500/50 hover:text-white transition-all" data-cat="popular">
+                    <i class="fa-solid fa-fire-flame-curved text-amber-400 mr-1"></i> Popular Highlights
+                </button>
+                <button onclick="filterMenu('starters')" class="menu-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border border-emerald-800 text-stone-300 hover:border-gold-500/50 hover:text-white transition-all" data-cat="starters">
+                    Starters & Small Plates
+                </button>
+                <button onclick="filterMenu('mains')" class="menu-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border border-emerald-800 text-stone-300 hover:border-gold-500/50 hover:text-white transition-all" data-cat="mains">
+                    Mains & Chef Specials
+                </button>
+                <button onclick="filterMenu('drinks')" class="menu-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border border-emerald-800 text-stone-300 hover:border-gold-500/50 hover:text-white transition-all" data-cat="drinks">
+                    Wines & Coffee
+                </button>
+            </div>
+
+            <!-- Menu Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" id="menu-grid">
+                
+                <!-- Item 1 -->
+                <div class="menu-card starters popular p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white flex items-center gap-2">
+                                Beetroot Salad <span class="text-xs font-sans text-emerald-400 font-normal">/ ჭარხლის სალათი</span>
+                            </h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">22 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Roasted beets, wild berries, plum dressing, and crisp walnut crumble with local herbs.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <div class="flex gap-2">
+                            <span class="px-2.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Popular</span>
+                            <span class="px-2.5 py-0.5 rounded text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 uppercase">Vegan Option</span>
+                        </div>
+                        <i class="fa-solid fa-leaf text-green-500/60 text-xs" title="Vegetarian Friendly"></i>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-card starters popular p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Hummus & Fresh Warm Pita</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">18 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Silky chickpea tahini cream garnished with toasted pine nuts, paprika oil, and wood-fired pita bread.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <div class="flex gap-2">
+                            <span class="px-2.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Popular</span>
+                            <span class="px-2.5 py-0.5 rounded text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 uppercase">Vegan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-card starters p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Stracciatella with Tomatoes</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">28 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Creamy local stracciatella cheese, sun-ripened heirloom tomatoes, Georgian green herb pesto, and crispy tarragon sourdough.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase">Chef's Starter</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-card mains popular p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Traditional Svanetian Meat Pie</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">32 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Kubdari freshly baked with hand-chopped spiced pork & beef, seasoned with authentic Svanetian salt and coriander.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Signature Heritage</span>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="menu-card mains popular p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Slow Cooked Tender Beef Cheeks</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">42 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Braised for 12 hours in Saperavi red wine sauce served on a velvet potato mousseline.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Guest Favorite</span>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="menu-card mains popular p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Slow Cooked Lamb with Bulgur</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">44 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Melt-in-your-mouth lamb shoulder cooked in spiced tomato reduction, herb-infused bulgur pilaf.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">House Special</span>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="menu-card starters p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Chicken Liver Pate & Beet Confit</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">24 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Smooth cognac-infused liver pate topped with sweet beet confit and toasted brioche.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase">Gourmet</span>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="menu-card starters popular p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Eggplant with Walnut Paste</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">20 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Traditional Badrijani Nigvzit rolls topped with pomegranate seeds and marigold herb oil.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 uppercase">Vegan Classic</span>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="menu-card drinks p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Georgian White & Amber Wine Selection</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">From 18 GEL / Glass</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Handpicked organic Qvevri wines: Rkatsiteli, Kisi, and Mtsvane from top Kakhetian winemakers.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-300 border border-purple-500/20 uppercase">Natural Qvevri</span>
+                    </div>
+                </div>
+
+                <!-- Item 10 -->
+                <div class="menu-card drinks p-6 rounded-2xl bg-cardBg border border-emerald-900/60 hover:border-gold-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-2xl text-white">Turkish Coffee & Artisan Latte</h3>
+                            <span class="text-gold-400 font-serif text-xl font-bold">10 GEL</span>
+                        </div>
+                        <p class="text-stone-400 text-sm mb-4">Finely ground sand-brewed Turkish coffee or rich espresso latte paired with Georgian delight sweets.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-emerald-900/40 pt-3">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Hot Beverage</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Glovo Order Banner -->
+            <div class="mt-14 rounded-2xl bg-gradient-to-r from-amber-950/60 via-botanical-800 to-amber-950/60 border border-amber-500/30 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-5">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500 text-botanical-900 flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-2xl text-white mb-1">Prefer Dining at Home?</h4>
+                        <p class="text-stone-300 text-sm">Order Ninia's Garden favorites directly delivered to your door in Tbilisi via Glovo.</p>
+                    </div>
+                </div>
+                <a href="https://glovoapp.com" target="_blank" rel="noopener" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-botanical-900 font-bold rounded-full text-xs uppercase tracking-widest transition-all whitespace-nowrap shadow-lg">
+                    Order on Glovo <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REVIEWS & TESTIMONIALS SECTION -->
+    <section id="reviews" class="py-24 bg-botanical-800/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <div class="inline-flex items-center gap-2 text-gold-400 text-xs font-semibold uppercase tracking-widest">
+                    <i class="fa-solid fa-star"></i> Real Guest Experiences
+                </div>
+                <h2 class="font-serif text-4xl sm:text-5xl text-white">Loved by Locals & Travelers</h2>
+                <p class="text-stone-400 text-sm">Over 1,840 verified reviews on Google with an average 4.5-star rating.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Review Card 1 -->
+                <div class="p-8 rounded-2xl bg-botanical-900/90 border border-emerald-900/50 flex flex-col justify-between relative gold-border-glow">
+                    <div class="space-y-4">
+                        <div class="flex text-gold-400 text-sm gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-300 text-sm italic leading-relaxed">
+                            "Look for the blue gate on the corner! The indoor restaurant was very classy, beautiful lighting and set tables. Outdoors was the stunning, lush garden. An incredible dining atmosphere in Tbilisi."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="block text-white font-medium text-sm">Elena Rostova</span>
+                            <span class="text-xs text-stone-500">Google Local Guide</span>
+                        </div>
+                        <span class="text-xs text-emerald-400"><i class="fa-brands fa-google"></i> Verified</span>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="p-8 rounded-2xl bg-botanical-900/90 border border-emerald-900/50 flex flex-col justify-between relative gold-border-glow">
+                    <div class="space-y-4">
+                        <div class="flex text-gold-400 text-sm gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-300 text-sm italic leading-relaxed">
+                            "Absolutely lovely restaurant with a stunning garden setting! If you’d like to sit outside, be sure to book in advance — the garden tables are truly worth it. The slow cooked lamb was remarkable."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="block text-white font-medium text-sm">Marcus Vance</span>
+                            <span class="text-xs text-stone-500">Dined last week</span>
+                        </div>
+                        <span class="text-xs text-emerald-400"><i class="fa-brands fa-google"></i> Verified</span>
+                    </div>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="p-8 rounded-2xl bg-botanical-900/90 border border-emerald-900/50 flex flex-col justify-between relative gold-border-glow">
+                    <div class="space-y-4">
+                        <div class="flex text-gold-400 text-sm gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-300 text-sm italic leading-relaxed">
+                            "The veggie bowl with falafel and eggplant with walnuts was outstanding. The place itself is stunning! Great wine selection and warm hospitality."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="block text-white font-medium text-sm">Sarah Jenkins</span>
+                            <span class="text-xs text-stone-500">Dined this month</span>
+                        </div>
+                        <span class="text-xs text-emerald-400"><i class="fa-brands fa-google"></i> Verified</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION & FOOTER SECTION -->
+    <footer id="contact" class="bg-botanical-900 border-t border-emerald-900/60 pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+                
+                <!-- Contact Info & Hours -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full border border-gold-500/50 bg-botanical-800 flex items-center justify-center text-gold-400">
+                            <i class="fa-solid font-serif text-xl">N</i>
+                        </div>
+                        <span class="font-serif text-3xl text-white">Ninia’s Garden</span>
+                    </div>
+
+                    <p class="text-stone-400 text-sm leading-relaxed max-w-md">
+                        Fine Georgian cuisine served in an intimate garden and classy indoor dining setting in the heart of Tbilisi.
+                    </p>
+
+                    <div class="space-y-4 text-sm text-stone-300">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-gold-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium text-white block">Address:</span>
+                                <span>97 Dimitri Uznadze St, Tbilisi 0102, Georgia</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone text-gold-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium text-white block">Phone / Table Enquiries:</span>
+                                <a href="tel:0322196669" class="hover:text-gold-400 transition-colors">+995 032 219 66 69</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-clock text-gold-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium text-white block">Opening Hours:</span>
+                                <span>Monday – Sunday: 1:00 PM – 2:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social links -->
+                    <div class="flex gap-4 pt-2">
+                        <a href="https://facebook.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-botanical-800 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-gold-400 hover:border-gold-500 transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-botanical-800 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-gold-400 hover:border-gold-500 transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://glovoapp.com" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-botanical-800 border border-emerald-800 flex items-center justify-center text-amber-400 hover:border-amber-400 transition-all">
+                            <i class="fa-solid fa-motorcycle"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Map Preview Card -->
+                <div class="lg:col-span-7">
+                    <div class="rounded-2xl bg-botanical-800 border border-emerald-800/60 p-6 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-serif text-2xl text-white">Find Us in Tbilisi</h3>
+                                <span class="text-xs bg-gateBlue-600 text-stone-200 px-3 py-1 rounded-full border border-gateBlue-500">Chugureti Neighborhood</span>
+                            </div>
+                            <p class="text-xs text-stone-400 mb-6">Look out for the signature dark blue gate located right on the corner of Dimitri Uznadze St.</p>
+                        </div>
+
+                        <!-- Stylized Map Card Overlay -->
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden bg-botanical-900 border border-emerald-900 flex items-center justify-center">
+                            <!-- Simulated styled map view -->
+                            <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#274f3b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            
+                            <!-- Location Marker Pin -->
+                            <div class="relative z-10 text-center space-y-2">
+                                <div class="w-12 h-12 rounded-full bg-gold-500 text-botanical-900 mx-auto flex items-center justify-center shadow-lg shadow-gold-500/30 animate-bounce">
+                                    <i class="fa-solid fa-utensils text-xl"></i>
+                                </div>
+                                <div class="bg-botanical-900/90 border border-gold-500/50 backdrop-blur px-4 py-2 rounded-xl text-center shadow-xl">
+                                    <p class="text-white font-serif font-bold text-sm">Ninia’s Garden</p>
+                                    <p class="text-[11px] text-stone-300">97 Dimitri Uznadze St</p>
+                                </div>
+                            </div>
+
+                            <!-- Map Actions -->
+                            <a href="https://maps.google.com/?q=97+Dimitri+Uznadze+St+Tbilisi" target="_blank" class="absolute bottom-4 right-4 bg-gold-500 text-botanical-900 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg hover:bg-gold-400 transition-all flex items-center gap-2">
+                                Open in Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
+                <p>&copy; 2026 Ninia's Garden Restaurant. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-stone-300 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-stone-300 transition-colors">Terms of Service</a>
+                    <a href="#about" class="hover:text-stone-300 transition-colors">Back to Top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- RESERVATION MODAL POPUP -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity">
+        <div class="bg-botanical-800 border border-emerald-700/60 rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl overflow-y-auto max-h-[90vh]">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-stone-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-400 border border-gold-500/30 flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-regular fa-calendar-check text-xl"></i>
+                </div>
+                <h3 class="font-serif text-3xl text-white">Reserve a Table</h3>
+                <p class="text-stone-300 text-xs mt-1">Ninia’s Garden · 97 Dimitri Uznadze St</p>
+            </div>
+
+            <!-- Booking Form -->
+            <form id="booking-form" onsubmit="handleReservation(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-stone-300 mb-1">Full Name</label>
+                    <input type="text" required placeholder="e.g. Sophio Giorgadze" class="w-full bg-botanical-900 border border-emerald-900 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-stone-300 mb-1">Phone Number</label>
+                        <input type="tel" required placeholder="+995 ..." class="w-full bg-botanical-900 border border-emerald-900 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors" />
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-stone-300 mb-1">Party Size</label>
+                        <select required class="w-full bg-botanical-900 border border-emerald-900 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors">
+                            <option value="1">1 Person</option>
+                            <option value="2" selected>2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5 Guests</option>
+                            <option value="6">6+ Large Group</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-stone-300 mb-1">Date</label>
+                        <input type="date" required class="w-full bg-botanical-900 border border-emerald-900 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors" />
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-stone-300 mb-1">Time</label>
+                        <input type="time" required value="19:00" class="w-full bg-botanical-900 border border-emerald-900 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors" />
+                    </div>
+                </div>
+
+                <!-- Seating Preference -->
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-stone-300 mb-2">Seating Area Preference</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-3 p-3 rounded-xl bg-botanical-900 border border-emerald-900 cursor-pointer hover:border-gold-500/50">
+                            <input type="radio" name="seating" value="outdoor" checked class="text-gold-500 focus:ring-0">
+                            <div>
+                                <span class="block text-xs font-semibold text-white">Outdoor Garden</span>
+                                <span class="block text-[10px] text-amber-400">Advance booking required</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-xl bg-botanical-900 border border-emerald-900 cursor-pointer hover:border-gold-500/50">
+                            <input type="radio" name="seating" value="indoor" class="text-gold-500 focus:ring-0">
+                            <div>
+                                <span class="block text-xs font-semibold text-white">Indoor Dining</span>
+                                <span class="block text-[10px] text-stone-400">Warm Fireplace & Tables</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-stone-300 mb-1">Special Requests (Optional)</label>
+                    <textarea rows="2" placeholder="Dietary restrictions, birthday celebration..." class="w-full bg-botanical-900 border border-emerald-900 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-gold-500 transition-colors"></textarea>
+                </div>
+
+                <!-- Confirmation Note -->
+                <p class="text-[11px] text-stone-400 italic">
+                    * Garden seating is subject to weather conditions. We hold tables for 15 minutes past reservation time.
+                </p>
+
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-gold-400 to-gold-500 text-botanical-900 font-bold uppercase tracking-widest text-xs rounded-xl hover:brightness-110 transition-all shadow-lg">
+                    Confirm Table Request
+                </button>
+            </form>
+
+            <!-- Success Notification Message Box -->
+            <div id="booking-success" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500 flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="font-serif text-2xl text-white">Reservation Request Sent!</h4>
+                <p class="text-stone-300 text-sm">Thank you for choosing Ninia’s Garden. Our team will contact you shortly to confirm your table details.</p>
+                <button onclick="closeModal()" class="px-6 py-2.5 bg-botanical-900 border border-emerald-700 text-gold-400 text-xs uppercase tracking-wider font-semibold rounded-lg hover:bg-botanical-700">
+                    Close Window
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Modal functionality
+        function openModal() {
+            document.getElementById('reservation-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('reservation-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            // Reset form status
+            setTimeout(() => {
+                document.getElementById('booking-form').classList.remove('hidden');
+                document.getElementById('booking-success').classList.add('hidden');
+            }, 300);
+        }
+
+        function handleReservation(event) {
+            event.preventDefault();
+            // Show confirmation UI
+            document.getElementById('booking-form').classList.add('hidden');
+            document.getElementById('booking-success').classList.remove('hidden');
+        }
+
+        // Mobile drawer menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
+        }
+
+        // Menu filter function
+        function filterMenu(category) {
+            const cards = document.querySelectorAll('.menu-card');
+            const tabs = document.querySelectorAll('.menu-tab');
+
+            // Update active tab styling
+            tabs.forEach(tab => {
+                if (tab.dataset.cat === category) {
+                    tab.className = "menu-tab active px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border transition-all bg-gold-500 text-botanical-900 border-gold-500";
+                } else {
+                    tab.className = "menu-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border border-emerald-800 text-stone-300 hover:border-gold-500/50 hover:text-white transition-all";
+                }
+            });
+
+            // Filter item cards
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Header shadow transition on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 40) {
+                header.classList.add('shadow-xl', 'bg-botanical-900/95');
+            } else {
+                header.classList.remove('shadow-xl', 'bg-botanical-900/95');
+            }
+        });
+    </script>
+</body>
+</html>
